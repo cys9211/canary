@@ -1430,7 +1430,7 @@ void CastViewer::removeViewer(ProtocolGame_ptr client, bool spy) {
 	}
 
 	if (!spy) {
-		sendChannelMessage("", it->second.first + " has left the cast.", TALKTYPE_CHANNEL_O, CHANNEL_CAST);
+		sendChannelMessage("", fmt::format("{} has left the cast.", it->second.first), TALKTYPE_CHANNEL_O, CHANNEL_CAST);
 	}
 
 	m_viewers.erase(it);
