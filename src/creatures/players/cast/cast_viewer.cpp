@@ -1460,8 +1460,8 @@ void CastViewer::handle(ProtocolGame_ptr client, const std::string &text, uint16
 		std::vector<std::string> CommandParam = explodeString(text.substr(1, text.length()), " ", 1);
 		if (strcasecmp(CommandParam[0].c_str(), "show") == 0) {
 			auto viewersNames = std::views::transform(m_viewers, [](const auto &pair) {
-                                return pair.second.first;
-                        });
+				return pair.second.first;
+			});
 			std::string messageViewer = fmt::format("{} spectator{}, {}.", m_viewers.size(), m_viewers.size() > 1 ? "s" : "", fmt::join(viewersNames.begin(), viewersNames.end(), ", "));
 
 			client->sendTextMessage(TextMessage(MESSAGE_STATUS, messageViewer));
