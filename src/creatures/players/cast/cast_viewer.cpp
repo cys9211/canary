@@ -1459,9 +1459,8 @@ void CastViewer::handle(ProtocolGame_ptr client, const std::string &text, uint16
 	if (client->m_castCooldownTime + 5000 < now) {
 		client->m_castCooldownTime = now, client->m_castCount = 0;
 	} else if (client->m_castCount++ >= 3) {
-		std::stringstream messageViewer;
-		messageViewer << "Please wait a " << ((client->m_castCooldownTime + 5000 - now) / 1000) + 1 << " seconds to send another message.";
-		client->sendTextMessage(TextMessage(MESSAGE_STATUS, messageViewer.str()));
+		std::string messageViewer = fmt::format("Please wait a {} seconds to send another message.", ((client->m_castCooldownTime + 5000 - now) / 1000) + 1;
+		client->sendTextMessage(TextMessage(MESSAGE_STATUS, messageViewer));
 		return;
 	}
 
