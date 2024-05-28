@@ -141,20 +141,12 @@ void CastViewer::setCastBroadcast(bool value) {
 }
 
 std::string CastViewer::getCastBroadcastTimeString() const {
-	std::stringstream broadcast_message;
 	int64_t seconds = getCastBroadcastTime() / 1000;
 	uint16_t hour = floor(seconds / 60 / 60 % 24);
 	uint16_t minute = floor(seconds / 60 % 60);
 	uint16_t second = floor(seconds % 60);
 
-	if (hour > 0) {
-		broadcast_message << hour << " hours, ";
-	}
-	if (minute > 0) {
-		broadcast_message << minute << " minutes and ";
-	}
-	broadcast_message << second << " seconds.";
-	return broadcast_message.str();
+	return fmt::format("{} hours, {} minutes and {} seconds", hour, minute, second);
 }
 
 int64_t CastViewer::getCastBroadcastTime() const {
