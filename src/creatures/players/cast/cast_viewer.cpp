@@ -1481,7 +1481,7 @@ void CastViewer::handle(ProtocolGame_ptr client, const std::string &text, uint16
 
 						if (!found) {
 							if (isCastChannel) {
-								sendChannelMessage("", sit->second.first + " was renamed for " + CommandParam[1] + ".", TALKTYPE_CHANNEL_O, CHANNEL_CAST);
+								sendChannelMessage("", fmt::format("{} was renamed to {}.", sit->second.first, CommandParam[1]), TALKTYPE_CHANNEL_O, CHANNEL_CAST);
 							}
 
 							auto mit = std::find(m_mutes.begin(), m_mutes.end(), asLowerCaseString(sit->second.first));
