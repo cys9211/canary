@@ -1403,18 +1403,17 @@ void CastViewer::addViewer(ProtocolGame_ptr client, bool spy) {
 		return;
 	}
 
-	std::stringstream message;
 	auto viewerId = m_viewers.size() + 1;
-	message << "Guest-" << viewerId;
+	std::string guestString = fmt::format("Guest-{}", viewerId);
 
-	m_viewers[client] = std::make_pair(message.str(), m_id);
+	m_viewers[client] = std::make_pair(guestString, m_id);
 
 	if (!spy) {
-		sendChannelMessage("", message.str() + " has entered the cast.", TALKTYPE_CHANNEL_O, CHANNEL_CAST);
+		sendChannelMessage("", fmt::format("{} has entered the cast.", guestString), TALKTYPE_CHANNEL_O, CHANNEL_CAST);
 
 		if (m_viewers.size() > m_castLiveRecord) {
 			m_castLiveRecord = m_viewers.size();
-			sendChannelMessage("", "New record: " + std::to_string(m_castLiveRecord) + " people are watching your livestream now.", TALKTYPE_CHANNEL_O, CHANNEL_CAST);
+			sendChannelMessage("", fmt::format("New record: {} people are watching your livestream now.", std::to_string(m_castLiveRecord), TALKTYPE_CHANNEL_O, CHANNEL_CAST);
 		}
 	}
 }
